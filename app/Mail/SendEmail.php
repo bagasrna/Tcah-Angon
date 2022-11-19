@@ -31,8 +31,10 @@ class SendEmail extends Mailable
      */
     public function envelope()
     {
+        $subject = $this->data['type'] == 'verification' ? 'Tcah Angon Email Verification' : 'Tcah Angon Forgot Code';
+        
         return new Envelope(
-            subject: 'Tcah Angon Email Verification',
+            subject: $subject,
         );
     }
 
@@ -43,8 +45,10 @@ class SendEmail extends Mailable
      */
     public function content()
     {
+        $view = $this->data['type'] == 'verification' ? 'emails.sendemail' : 'emails.forgot';
+
         return new Content(
-            view: 'emails.sendemail',
+            view: $view,
         );
     }
 

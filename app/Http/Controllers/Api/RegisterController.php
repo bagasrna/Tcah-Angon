@@ -14,7 +14,10 @@ class RegisterController extends Controller
     public function index(Request $request){
         //set validation
         $validator = Validator::make($request->all(), [
-            'name'      => 'required',
+            'first_name'      => 'required',
+            'last_name'      => 'required',
+            'address'      => 'required',
+            'phone'      => 'required',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|min:8|confirmed'
         ]);
@@ -26,7 +29,10 @@ class RegisterController extends Controller
 
         //create user
         $user = User::create([
-            'name'      => $request->name,
+            'first_name'      => $request->first_name,
+            'last_name'      => $request->last_name,
+            'address'      => $request->address,
+            'phone'     => $request->phone,
             'email'     => $request->email,
             'password'  => bcrypt($request->password),
             'activation_code' => random_int(100000, 999999),
@@ -37,6 +43,7 @@ class RegisterController extends Controller
         if($user) {
             $dataEmail = [
                 'user'    => $user,
+                'type' => 'verification'
             ];
            
             Mail::to($user->email)->send(new SendEmail($dataEmail));
@@ -52,5 +59,74 @@ class RegisterController extends Controller
         return response()->json([
             'success' => false,
         ], 409);
+    }
+
+    public function verification(Request $request){
+        $user = User::where('email', $request->email)->first();
+
+        if($request->activation_code == $user->activation_code){
+            $user->is_active = 1;
+            $user->save();
+            
+            return response()->json([
+                'success' => true,
+                'message' => "Verifikasi berhasil!",
+                'user'    => $user,  
+            ], 201);
+        } else {
+            return response()->json([
+                'success' => false,
+            ], 409);
+        }
+    }
+
+    public function forgot(Request $request){
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'email'     => 'required',
+            'password'  => 'required|min:8',
+            'activation_code' => 'required'
+        ]);
+
+        //if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user){
+            if($user->activation_code == $request->activation_code){
+                $user->password = bcrypt($request->password);
+                $user->save();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => "Berhasil mengubah password!",
+                    'user'    => $user,  
+                ], 201);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => "Gagal mengubah password!",
+            ], 409);
+        }
+    }
+
+    public function forgotVerification(Request $request){
+        $user = User::where('email', $request->email)->first();
+
+        if($request->activation_code == $user->activation_code){
+            return response()->json([
+                'success' => true,
+                'message' => "Verifikasi kode forgot berhasil!",
+                'user'    => $user,  
+            ], 201);
+        } else {
+            return response()->json([
+                'success' => false,
+            ], 409);
+        }
     }
 }

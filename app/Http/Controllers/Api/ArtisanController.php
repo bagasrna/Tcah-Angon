@@ -25,4 +25,10 @@ class ArtisanController extends Controller
         return response()
                 ->json('Success Call Artisan Migrate Fresh');
     }
+
+    public function seed(){
+        Artisan::call('migrate:fresh --seed');
+        return response()
+                ->json('Success Call Artisan Migrate Fresh Seed');
+    }
 }

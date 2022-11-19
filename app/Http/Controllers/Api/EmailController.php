@@ -16,12 +16,16 @@ class EmailController extends Controller
         if(!$user){
             return response()->json([
                 'success' => false,
-                'message' => "Email tidak ditemukan!",
+                'message' => "User tidak ditemukan!",
             ], 409);
         }
 
+        $user->activation_code = random_int(100000, 999999);
+        $user->save();
+
         $data = [
             'user'    => $user,
+            'type' => 'verification'
         ];
        
         Mail::to($request->email)->send(new SendEmail($data));
@@ -29,6 +33,33 @@ class EmailController extends Controller
         return response()->json([
             'success' => true,
             'message' => "Email kode aktivasi berhasil dikirim",
+            'user'    => $user,
+        ], 200);
+    }
+
+    public function forgot(Request $request){
+        $user = User::where('email', $request->email)->first();
+
+        if(!$user){
+            return response()->json([
+                'success' => false,
+                'message' => "User tidak ditemukan!",
+            ], 409);
+        }
+
+        $user->activation_code = random_int(100000, 999999);
+        $user->save();
+
+        $data = [
+            'user'    => $user,
+            'type' => 'forgot'
+        ];
+       
+        Mail::to($request->email)->send(new SendEmail($data));
+       
+        return response()->json([
+            'success' => true,
+            'message' => "Email kode forgot berhasil dikirim",
             'user'    => $user,
         ], 200);
     }

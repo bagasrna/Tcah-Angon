@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +23,18 @@ class LoginController extends Controller
 
         //get credentials from request
         $credentials = $request->only('email', 'password');
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user){
+            if($user->is_active == 0){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Akun belum di aktivasi!',
+                    'is_active' => $user->is_active
+                ], 401);
+            }
+        }
 
         //if auth failed
         if(!$token = auth()->guard('api')->attempt($credentials)) {
