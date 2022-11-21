@@ -9,7 +9,10 @@ use App\Models\Kandang;
 class KandangController extends Controller
 {
     public function index(){
-        $kandangs = Kandang::select('id', 'peternak_id', 'name', 'bagi_hasil', 'potensi_roi', 'status', 'harga', 'paket', 'created_at', 'updated_at')->with(['peternak'])->get();
+        $kandangs = Kandang::select('*')
+                    ->with(['peternak'])
+                    ->get();
+
         if($kandangs){
             return response()->json([
                 'success' => true,
@@ -21,6 +24,26 @@ class KandangController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Kandang tidak ada!'
+        ], 409);
+    }
+
+    public function show($id){
+        $kandang = Kandang::select('*')
+                    ->where('id', $id)
+                    ->with(['peternak'])
+                    ->get();
+
+        if($kandang){
+            return response()->json([
+                'success' => true,
+                'message' => "Kandang berhasil diterima!",
+                'kandang'    => $kandang,  
+            ], 201);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Kandang tidak ditemukan!'
         ], 409);
     }
 }

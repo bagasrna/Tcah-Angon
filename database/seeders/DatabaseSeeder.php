@@ -101,7 +101,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Domba Ekor Tipis',
             'bagi_hasil' => 40,
             'potensi_roi' => 'https://drive.google.com/file/d/1a8pFyZhmkUKp2WnSvW8e9aJUmzGrDCi4/view?usp=share_link',
-            'status' => 33,
+            'unit_tersedia' => 33,
+            'status' => 1,
             'harga' => 100000,
             'paket' => 1,
         ]);

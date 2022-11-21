@@ -13,6 +13,9 @@ use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\AboutusController;
 use App\Http\Controllers\Api\PanduanController;
 use App\Http\Controllers\Api\KandangController;
+use App\Http\Controllers\Api\PeternakController;
+use App\Http\Controllers\Api\InvestasiController;
+use App\Http\Controllers\Api\PembayaranController;
 
 Route::post('/register', [RegisterController::class, 'index']);
 Route::post('/verification', [RegisterController::class, 'verification']);
@@ -42,6 +45,20 @@ Route::post('/panduan', [PanduanController::class, 'create']);
 Route::get('/panduan/{id}', [PanduanController::class, 'show']);
 
 Route::get('/kandang', [KandangController::class, 'index']);
+Route::post('/kandang', [KandangController::class, 'create']); // not ready
+Route::get('/kandang/{id}', [KandangController::class, 'show']);
+
+Route::get('/peternak', [PeternakController::class, 'index']);
+Route::post('/peternak', [PeternakController::class, 'create']); // not ready
+Route::get('/peternak/{id}', [PeternakController::class, 'show']);
+
+Route::get('/investasi', [InvestasiController::class, 'index'])->middleware('auth:api');
+Route::post('/investasi', [InvestasiController::class, 'create']);
+Route::get('/investasi/{id}', [InvestasiController::class, 'show']);
+
+Route::get('/pembayaran', [PembayaranController::class, 'index']);
+Route::post('/pembayaran', [PembayaranController::class, 'create']);
+Route::get('/pembayaran/{id}', [PembayaranController::class, 'show']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
