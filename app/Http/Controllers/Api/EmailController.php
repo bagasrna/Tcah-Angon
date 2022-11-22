@@ -24,7 +24,7 @@ class EmailController extends Controller
         $user->save();
 
         $data = [
-            'user'    => $user,
+            'activation_code'    => $user->activation_code,
             'type' => 'verification'
         ];
        

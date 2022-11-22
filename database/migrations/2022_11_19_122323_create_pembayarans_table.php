@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->string('bank');
             $table->string('rekening');
             $table->timestamps();
         });

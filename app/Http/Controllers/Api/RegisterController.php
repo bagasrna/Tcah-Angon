@@ -27,6 +27,24 @@ class RegisterController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $activation_code = random_int(100000, 999999);
+
+        try {
+            $dataEmail = [
+                'activation_code'    => $activation_code,
+                'type' => 'verification'
+            ];
+           
+            Mail::to($request->email)->send(new SendEmail($dataEmail));
+        }
+
+        catch(Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 409);
+        }
+
         //create user
         $user = User::create([
             'first_name'      => $request->first_name,
@@ -35,19 +53,12 @@ class RegisterController extends Controller
             'phone'     => $request->phone,
             'email'     => $request->email,
             'password'  => bcrypt($request->password),
-            'activation_code' => random_int(100000, 999999),
+            'activation_code' => $activation_code,
             'is_active' => 0
         ]);
 
         //return response JSON user is created
         if($user) {
-            $dataEmail = [
-                'user'    => $user,
-                'type' => 'verification'
-            ];
-           
-            Mail::to($user->email)->send(new SendEmail($dataEmail));
-
             return response()->json([
                 'success' => true,
                 'message' => "Registrasi berhasil!",

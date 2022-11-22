@@ -37,7 +37,7 @@ class InvestasiController extends Controller
             'kandang_id' => 'required',
             'pembayaran_id' => 'required',
             'jumlah_unit' => 'required',
-            'bukti_pembayaran' => 'required',
+            'bukti_pembayaran' => 'required|image|file',
         ]);
 
         //if validation fails
@@ -64,7 +64,7 @@ class InvestasiController extends Controller
             'kandang_id' => $request->kandang_id,
             'pembayaran_id' => $request->pembayaran_id,
             'jumlah_unit' => $request->jumlah_unit,
-            'bukti_pembayaran' => $request->bukti_pembayaran,
+            'bukti_pembayaran' => $request->file('bukti_pembayaran')->store('bukti_pembayaran'),
             'total_harga' => $total_harga,
         ]);
 
@@ -73,7 +73,7 @@ class InvestasiController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => "Investasi berhasil!",
-                'investasi'    => $investasi,  
+                'investasi'    => $investasi, 
             ], 201);
         }
 

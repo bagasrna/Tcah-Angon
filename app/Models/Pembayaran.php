@@ -12,6 +12,7 @@ class Pembayaran extends Model
 
     protected $fillable = [
         'user_id',
+        'bank',
         'rekening',
     ];
     

@@ -10,6 +10,8 @@ use App\Models\Blog;
 use App\Models\AboutUs;
 use App\Models\Peternak;
 use App\Models\Kandang;
+use App\Models\Pembayaran;
+use App\Models\Investasi;
 
 class DatabaseSeeder extends Seeder
 {
@@ -105,6 +107,21 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
             'harga' => 100000,
             'paket' => 1,
+        ]);
+
+        Pembayaran::create([
+            'user_id' => 1,
+            'bank' => 'BCA',
+            'rekening' => '5070533828'
+        ]);
+
+        Investasi::create([
+            'user_id' => 1,
+            'kandang_id' => 1,
+            'pembayaran_id' => 1,
+            'jumlah_unit' => 5,
+            'total_harga' => 500000,
+            'bukti_pembayaran' => 'Ini Image',
         ]);
     }
 }

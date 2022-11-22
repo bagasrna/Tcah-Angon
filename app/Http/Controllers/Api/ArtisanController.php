@@ -31,4 +31,10 @@ class ArtisanController extends Controller
         return response()
                 ->json('Success Call Artisan Migrate Fresh Seed');
     }
+
+    public function key(){
+        Artisan::call('key:generate');
+        return response()
+                ->json('Success Call Artisan Key Generate');
+    }
 }
