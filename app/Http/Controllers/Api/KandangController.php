@@ -31,7 +31,7 @@ class KandangController extends Controller
         $kandang = Kandang::select('*')
                     ->where('id', $id)
                     ->with(['peternak'])
-                    ->get();
+                    ->first();
 
         if($kandang){
             return response()->json([
@@ -44,6 +44,26 @@ class KandangController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Kandang tidak ditemukan!'
+        ], 409);
+    }
+
+    public function paket($id){
+        $kandangs = Kandang::select('*')
+                    ->with(['peternak'])
+                    ->where('paket', $id)
+                    ->get();
+
+        if(count($kandangs) > 0){
+            return response()->json([
+                'success' => true,
+                'message' => "Kandang berhasil diterima!",
+                'kandangs'    => $kandangs,  
+            ], 201);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Kandang tidak ada!'
         ], 409);
     }
 }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('status');
             $table->integer('harga');
             $table->integer('paket');
+            $table->string('proposal');
             $table->timestamps();
         });
     }

@@ -27,6 +27,7 @@ Route::post('/logout', [LogoutController::class, 'index']);
 
 Route::get('/pop-up', [PopupController::class, 'index']);
 Route::post('/pop-up', [PopupController::class, 'create']);
+Route::get('/pop-up/{id}', [PopupController::class, 'show']);
 
 Route::get('/faq', [FaqController::class, 'index']);
 Route::post('/faq', [FaqController::class, 'create']);
@@ -47,9 +48,10 @@ Route::get('/panduan/{id}', [PanduanController::class, 'show']);
 Route::get('/kandang', [KandangController::class, 'index']);
 Route::post('/kandang', [KandangController::class, 'create']); // not ready
 Route::get('/kandang/{id}', [KandangController::class, 'show']);
+Route::get('/kandang/paket/{id}', [KandangController::class, 'paket']);
 
 Route::get('/peternak', [PeternakController::class, 'index']);
-Route::post('/peternak', [PeternakController::class, 'create']); // not ready
+Route::post('/peternak', [PeternakController::class, 'create']);
 Route::get('/peternak/{id}', [PeternakController::class, 'show']);
 
 Route::get('/investasi', [InvestasiController::class, 'index'])->middleware('auth:api');

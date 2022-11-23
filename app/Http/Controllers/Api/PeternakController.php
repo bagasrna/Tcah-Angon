@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Peternak;
+use Illuminate\Support\Facades\Validator;
 
 class PeternakController extends Controller
 {
@@ -25,7 +26,9 @@ class PeternakController extends Controller
     }
 
     public function show($id){
-        $peternak = Peternak::where('id', $id)->first();
+        $peternak = Peternak::where('id', $id)
+                    ->with(['kandangs', 'ulasans'])            
+                    ->first();
 
         if($peternak){
             return response()->json([
@@ -38,6 +41,50 @@ class PeternakController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Peternak tidak ditemukan!'
+        ], 409);
+    }
+
+    public function create(Request $request){
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'status' => 'required',
+            'photo' => 'required|image|file',
+            'address' => 'required',
+            'rating' => 'required',
+            'description' => 'required',
+            'dokumentasi' => 'required|image|file',
+        ]);
+
+        //if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        
+        //create peternak
+        $peternak = Peternak::create([
+            'name' => $request->name,
+            'status' => $request->status,
+            'photo' => $request->file('photo')->store('photo_profile'),
+            'photo' => $request->photo,
+            'rating' => $request->rating,
+            'description' => $description,
+            'dokumentasi' => $request->file('dokumentasi')->store('dokumentasi'),
+        ]);
+
+        //return response JSON peternak is created
+        if($peternak) {
+            return response()->json([
+                'success' => true,
+                'message' => "Peternak berhasil ditambahkan!",
+                'peternak'    => $peternak, 
+            ], 201);
+        }
+
+        //return JSON process insert failed 
+        return response()->json([
+            'success' => false,
+            'message' => "Peternak gagal ditambahkan!",
         ], 409);
     }
 }

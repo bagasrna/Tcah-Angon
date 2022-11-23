@@ -7,11 +7,13 @@ use Illuminate\Database\Seeder;
 use App\Models\PopUp;
 use App\Models\Panduan;
 use App\Models\Blog;
+use App\Models\Faq;
 use App\Models\AboutUs;
 use App\Models\Peternak;
 use App\Models\Kandang;
 use App\Models\Pembayaran;
 use App\Models\Investasi;
+use App\Models\Ulasan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -74,6 +76,11 @@ class DatabaseSeeder extends Seeder
             'description' => 'Ini Adalah Blog Tips memasak daging domba'
         ]);
 
+        Faq::create([
+            'title' => 'Ini adalah FAQ 1',
+            'description' => 'Ini Adalah Description FAQ 1'
+        ]);
+
         AboutUs::create([
             'title' => 'Apa Itu Tcah Angon',
             'description' => 'Tcah Angon hadir dengan aplikasi investasi'
@@ -107,6 +114,7 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
             'harga' => 100000,
             'paket' => 1,
+            'proposal' => 'https://drive.google.com/file/d/1a8pFyZhmkUKp2WnSvW8e9aJUmzGrDCi4/view?usp=share_link',
         ]);
 
         Pembayaran::create([
@@ -122,6 +130,30 @@ class DatabaseSeeder extends Seeder
             'jumlah_unit' => 5,
             'total_harga' => 500000,
             'bukti_pembayaran' => 'Ini Image',
+        ]);
+
+        Ulasan::create([
+            'peternak_id' => 1,
+            'name' => 'Agung Setyawan',
+            'bidang_ahli' => "Uji Kandang",
+            'rating' => 5,
+            'ulasan' => 'Kandang sudah layak menjadi tempat ternak. Standart pakan dengan wilayah sekitar juga sudah sangat cocok untuk pemeliharaan.',
+        ]);
+
+        Ulasan::create([
+            'peternak_id' => 1,
+            'name' => 'Dimas Sapoetra',
+            'bidang_ahli' => "Ahli Kesehatan Hewan",
+            'rating' => 4.7,
+            'ulasan' => 'Kesehatan stabil dibantu dengan monitoring yang bagus dan modern membuat kesehatan makin terjaga.',
+        ]);
+
+        Ulasan::create([
+            'peternak_id' => 1,
+            'name' => 'Evelyn Wijaya',
+            'bidang_ahli' => "Ahli Pakan",
+            'rating' => 4.7,
+            'ulasan' => 'Pemberian pakan sudah sangat bagus dengan sistem yang benar dan baik',
         ]);
     }
 }
