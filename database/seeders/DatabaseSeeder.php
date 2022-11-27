@@ -92,6 +92,7 @@ class DatabaseSeeder extends Seeder
         Peternak::create([
             'name' => 'Ibu Muslimah',
             'status' => 'Peternak modern domba lokal',
+            'photo' => 'https://i.ibb.co/zmQ6CJB/Cuplikan-layar-2022-11-16-055054.jpg',
             'address' => 'Dampit, Malang',
             'rating' => 4,
             'description' => 'Ibu Muslimah adalah peternak lokal modern yang telah bergabung selama 1 tahun dengan Tcah Angon dan telah banyak bekerjasama dengan sukses. Ibu Muslimah mendapat penghargaan "The Most Active Farmer" (2021) pada acara peringatan Hari Ternak yang diadakan di Yogyakarta',

@@ -53,23 +53,28 @@ class PeternakController extends Controller
             'address' => 'required',
             'rating' => 'required',
             'description' => 'required',
-            'dokumentasi' => 'required|image|file',
+            'dokumentasi' => 'required',
+            'dokumentasi.*' => 'required|image|file',
         ]);
 
         //if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        
+
+
+        foreach($request->file('dokumentasi') as $dokumentasi){
+            $image[] = $dokumentasi->store('dokumentasi');
+        }
         //create peternak
         $peternak = Peternak::create([
             'name' => $request->name,
             'status' => $request->status,
             'photo' => $request->file('photo')->store('photo_profile'),
-            'photo' => $request->photo,
+            'address' => $request->address,
             'rating' => $request->rating,
-            'description' => $description,
-            'dokumentasi' => $request->file('dokumentasi')->store('dokumentasi'),
+            'description' => $request->description,
+            'dokumentasi' => json_encode($image),
         ]);
 
         //return response JSON peternak is created
@@ -78,6 +83,7 @@ class PeternakController extends Controller
                 'success' => true,
                 'message' => "Peternak berhasil ditambahkan!",
                 'peternak'    => $peternak, 
+                'dokumentasi' => json_decode($peternak->dokumentasi)
             ], 201);
         }
 
