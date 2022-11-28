@@ -20,7 +20,17 @@ class Kandang extends Model
         'status',
         'harga',
         'paket',
-        'proposal'
+        'proposal',
+        'dibutuhkan',
+        'terkumpul',
+        'durasi',
+        'berat_awal',
+        'estimasi',
+        'berat_akhir',
+        'persentase',
+        'berat',
+        'kesehatan',
+        'pakan',
     ];
 
     public function peternak() 

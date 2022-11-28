@@ -31,7 +31,7 @@ return new class extends Migration
             $table->float('estimasi');
             $table->float('berat_akhir');
             $table->float('persentase');
-            $table->float('berkat');
+            $table->float('berat');
             $table->string('kesehatan');
             $table->string('pakan');
             $table->timestamps();

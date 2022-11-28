@@ -109,6 +109,16 @@ class DatabaseSeeder extends Seeder
             'harga' => 100000,
             'paket' => 1,
             'proposal' => 'https://drive.google.com/file/d/1a8pFyZhmkUKp2WnSvW8e9aJUmzGrDCi4/view?usp=share_link',
+            'dibutuhkan' => 3300000,
+            'terkumpul' => 1700000,
+            'durasi' => 3,
+            'berat_awal' => 60,
+            'estimasi' => 12100000,
+            'berat_akhir' => 90,
+            'persentase' => 24.57,
+            'berat' => 82,
+            'kesehatan' => "Baik",
+            'pakan' => "Standard",
         ]);
 
         Pembayaran::create([
