@@ -24,6 +24,16 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('paket');
             $table->string('proposal');
+            $table->float('dibutuhkan');
+            $table->float('terkumpul');
+            $table->integer('durasi');
+            $table->float('berat_awal');
+            $table->float('estimasi');
+            $table->float('berat_akhir');
+            $table->float('persentase');
+            $table->float('berkat');
+            $table->string('kesehatan');
+            $table->string('pakan');
             $table->timestamps();
         });
     }

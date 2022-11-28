@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('photo');
             $table->string('address');
-            $table->integer('rating');
+            $table->float('rating');
             $table->text('description');
             $table->string('dokumentasi');
             $table->timestamps();
