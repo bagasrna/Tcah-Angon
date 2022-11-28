@@ -56,6 +56,15 @@ class InvestasiController extends Controller
         
         $total_harga = $request->jumlah_unit * $kandang->harga;
         $kandang->unit_tersedia -= $request->jumlah_unit;
+        $kandang->terkumpul += $total_harga;
+
+        if($kandang->terkumpul > $kandang->dibutuhkan){
+            return response()->json([
+                'success' => false,
+                'message' => "Investasi gagal! Dana investasi lebih dari dana yang dibutuhkan!",
+            ], 409);
+        }
+
         $kandang->save();
         
         //create investasi
