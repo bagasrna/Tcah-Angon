@@ -61,7 +61,7 @@ class InvestasiController extends Controller
         if($kandang->terkumpul > $kandang->dibutuhkan){
             return response()->json([
                 'success' => false,
-                'message' => "Investasi gagal! Dana investasi lebih dari dana yang dibutuhkan!",
+                'message' => "Investasi gagal! Dana investasi melebihi dana yang dibutuhkan!",
             ], 409);
         }
 
