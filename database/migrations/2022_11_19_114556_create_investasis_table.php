@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('kandang_id');
             $table->foreignId('pembayaran_id');
             $table->integer('jumlah_unit');
-            $table->integer('total_harga');
+            $table->double('total_harga');
             $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
         });
