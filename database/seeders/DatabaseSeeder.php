@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\PopUp;
 use App\Models\Panduan;
 use App\Models\Blog;
@@ -24,6 +25,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::create([
+            'first_name' => 'Fadli',
+            'last_name' => 'Bagas',
+            'address' => 'Jalan Dampit No 88',
+            'phone' => '081234567890',
+            'email' => 'bagasrnfull@gmail.com',
+            'password' => bcrypt('spenesa234'),
+            'activation_code' => 234765,
+            'is_active' => 1,
+        ]);
+
         PopUp::create([
             'title' => 'Profesional',
             'description' => 'Kualitas pengelolaan akan dilakukan secara terjadwal dan konsisten. Disisi lain, pengolahan kandang berbasis IoT sehingga kualitas yang dihasil sesuai harapan.'
