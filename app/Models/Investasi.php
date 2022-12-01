@@ -18,6 +18,7 @@ class Investasi extends Model
         'pembayaran_id',
         'jumlah_unit',
         'total_harga',
+        'is_done',
         'bukti_pembayaran',
     ];
 
