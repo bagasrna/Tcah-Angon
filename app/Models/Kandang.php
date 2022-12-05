@@ -14,11 +14,13 @@ class Kandang extends Model
     protected $fillable = [
         'peternak_id',
         'name',
+        'foto',
         'bagi_hasil',
         'potensi_roi',
         'unit_tersedia',
         'status',
         'harga',
+        'harga_kg',
         'paket',
         'proposal',
         'dibutuhkan',
