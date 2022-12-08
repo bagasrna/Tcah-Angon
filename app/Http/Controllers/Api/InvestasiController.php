@@ -30,6 +30,26 @@ class InvestasiController extends Controller
         ], 409);
     }
 
+    public function show($id){
+        $investasi = Investasi::select('*')
+                    ->where('id', $id)
+                    ->with(['user'])
+                    ->first();
+
+        if($investasi){
+            return response()->json([
+                'success' => true,
+                'message' => "Investasi berhasil diterima!",
+                'investasi'    => $investasi,  
+            ], 201);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Investasi tidak ditemukan!'
+        ], 409);
+    }
+
     public function create(Request $request){
         //set validation
         $validator = Validator::make($request->all(), [
@@ -90,6 +110,27 @@ class InvestasiController extends Controller
         return response()->json([
             'success' => false,
             'message' => "Investasi gagal!",
+        ], 409);
+    }
+
+    public function prediksi(Request $request){
+        $kandang = Kandang::where('id', $request->id_kandang)
+                        ->with(['peternak'])
+                        ->first();
+        
+        if($kandang && $request->nominal && $request->id_kandang){
+            $prediksi = $request->nominal / $kandang->harga * 6540;
+
+            return response()->json([
+                'success' => true,
+                'message' => "Prediksi berhasil!",
+                'prediksi'    => $prediksi,  
+            ], 201);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Prediksi gagal! Input salah atau Kandang tidak ditemukan!'
         ], 409);
     }
 }
