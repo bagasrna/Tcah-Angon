@@ -11,7 +11,7 @@ class Pembayaran extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'peternak_id',
         'bank',
         'rekening',
     ];
@@ -19,5 +19,10 @@ class Pembayaran extends Model
     public function investasis()
     {
         return $this->hasMany(Investasi::class);
+    }
+
+    public function peternak() 
+    {
+        return $this->belongsTo(Peternak::class, 'peternak_id');
     }
 }
