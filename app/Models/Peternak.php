@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Kandang;
 use App\Models\Ulasan;
+use App\Models\Pembayaran;
 
 class Peternak extends Model
 {
@@ -29,5 +30,10 @@ class Peternak extends Model
     public function ulasans()
     {
         return $this->hasMany(Ulasan::class);
+    }
+
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class);
     }
 }
