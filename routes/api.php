@@ -46,7 +46,7 @@ Route::post('/panduan', [PanduanController::class, 'create']);
 Route::get('/panduan/{id}', [PanduanController::class, 'show']);
 
 Route::get('/kandang', [KandangController::class, 'index']);
-Route::post('/kandang', [KandangController::class, 'create']); // not ready
+Route::post('/kandang', [KandangController::class, 'create']);
 Route::get('/kandang/{id}', [KandangController::class, 'show']);
 Route::get('/kandang/paket/{id}', [KandangController::class, 'paket']);
 
@@ -57,10 +57,11 @@ Route::get('/peternak/{id}', [PeternakController::class, 'show']);
 Route::get('/investasi', [InvestasiController::class, 'index'])->middleware('auth:api');
 Route::post('/investasi', [InvestasiController::class, 'create']);
 Route::get('/investasi/{id}', [InvestasiController::class, 'show']);
+Route::post('/prediksi', [InvestasiController::class, 'prediksi']);
 
-Route::get('/pembayaran', [PembayaranController::class, 'index']);
-Route::post('/pembayaran', [PembayaranController::class, 'create']);
-Route::get('/pembayaran/{id}', [PembayaranController::class, 'show']);
+Route::get('/rekening', [PembayaranController::class, 'index']);
+Route::post('/rekening', [PembayaranController::class, 'create']);
+Route::get('/rekening/{id}', [PembayaranController::class, 'show']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();

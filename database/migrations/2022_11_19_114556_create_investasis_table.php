@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('pembayaran_id');
             $table->integer('jumlah_unit');
             $table->double('total_harga');
+            $table->boolean('is_done');
             $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
         });

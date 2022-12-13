@@ -53,7 +53,12 @@ class DatabaseSeeder extends Seeder
 
         Panduan::create([
             'title' => 'Investasi',
-            'description' => 'Ini Adalah Panduan Investasi'
+            'description' => 'Cara Investasi
+            1. Tentukan Investasi yang tepat dan baik
+            2. Pahami proses investasi
+            3. Verifikasi dengan akurat
+            5. Amati pergerakan harga
+            6. Jangan takut memulai'
         ]);
 
         Panduan::create([
@@ -111,21 +116,43 @@ class DatabaseSeeder extends Seeder
             'dokumentasi' => 'https://i.ibb.co/zmQ6CJB/Cuplikan-layar-2022-11-16-055054.jpg',
         ]);
 
+        Peternak::create([
+            'name' => 'Pak Sugeng',
+            'status' => 'Peternak modern domba lokal',
+            'photo' => 'https://i.ibb.co/zmQ6CJB/Cuplikan-layar-2022-11-16-055054.jpg',
+            'address' => 'Dampit, Malang',
+            'rating' => 5,
+            'description' => 'Pak  Sugeng adalah peternak lokal modern yang telah bergabung Tcah Angon dan telah banyak berkerjasama dengan sukses. Pak Sugeng peternak yang sangat menekuni beberapa ternak dan sistem fattening yang modern.',
+            'dokumentasi' => 'https://i.ibb.co/zmQ6CJB/Cuplikan-layar-2022-11-16-055054.jpg',
+        ]);
+
+        Peternak::create([
+            'name' => 'Pak Budi',
+            'status' => 'Peternak modern domba lokal',
+            'photo' => 'https://i.ibb.co/zmQ6CJB/Cuplikan-layar-2022-11-16-055054.jpg',
+            'address' => 'Dampit, Malang',
+            'rating' => 5,
+            'description' => 'Pak Budi adalah peternak lokal modern yang telah bergabung Tcah Angon dan telah banyak berkerjasama dengan sukses. Pak Sugeng peternak yang sangat ramah dan memiliki kandang yang sudah sangat mumpuni dalam program ternak domba yang baik.',
+            'dokumentasi' => 'https://i.ibb.co/zmQ6CJB/Cuplikan-layar-2022-11-16-055054.jpg',
+        ]);
+
         Kandang::create([
             'peternak_id' => 1,
             'name' => 'Domba Ekor Tipis',
+            'foto' => 'ibb.co',
             'bagi_hasil' => 40,
             'potensi_roi' => 'https://drive.google.com/file/d/1a8pFyZhmkUKp2WnSvW8e9aJUmzGrDCi4/view?usp=share_link',
-            'unit_tersedia' => 33,
+            'unit_tersedia' => 165,
             'status' => 1,
             'harga' => 100000,
+            'harga_kg' => 55000,
             'paket' => 1,
             'proposal' => 'https://drive.google.com/file/d/1a8pFyZhmkUKp2WnSvW8e9aJUmzGrDCi4/view?usp=share_link',
-            'dibutuhkan' => 3300000,
-            'terkumpul' => 1700000,
+            'dibutuhkan' => 16500000,
+            'terkumpul' => 0,
             'durasi' => 3,
             'berat_awal' => 60,
-            'estimasi' => 12100000,
+            'estimasi' => 20000000,
             'berat_akhir' => 90,
             'persentase' => 24.57,
             'berat' => 82,
@@ -134,7 +161,25 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pembayaran::create([
-            'user_id' => 1,
+            'peternak_id' => 1,
+            'bank' => 'BCA',
+            'rekening' => '5070533828'
+        ]);
+
+        Pembayaran::create([
+            'peternak_id' => 1,
+            'bank' => 'BRI',
+            'rekening' => '6212312321'
+        ]);
+
+        Pembayaran::create([
+            'peternak_id' => 2,
+            'bank' => 'BCA',
+            'rekening' => '5070533828'
+        ]);
+
+        Pembayaran::create([
+            'peternak_id' => 3,
             'bank' => 'BCA',
             'rekening' => '5070533828'
         ]);
@@ -145,6 +190,7 @@ class DatabaseSeeder extends Seeder
             'pembayaran_id' => 1,
             'jumlah_unit' => 5,
             'total_harga' => 500000,
+            'is_done' => 0,
             'bukti_pembayaran' => 'Ini Image',
         ]);
 
