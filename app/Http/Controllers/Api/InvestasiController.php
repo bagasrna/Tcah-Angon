@@ -95,6 +95,7 @@ class InvestasiController extends Controller
             'jumlah_unit' => $request->jumlah_unit,
             'bukti_pembayaran' => $request->file('bukti_pembayaran')->store('bukti_pembayaran'),
             'total_harga' => $total_harga,
+            'is_done' => 0,
         ]);
 
         //return response JSON investasi is created
