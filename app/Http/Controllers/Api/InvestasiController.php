@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Investasi;
 use App\Models\Kandang;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class InvestasiController extends Controller
 {
@@ -31,16 +32,27 @@ class InvestasiController extends Controller
     }
 
     public function show($id){
-        $investasi = Investasi::select('*')
-                    ->where('id', $id)
-                    ->with(['user'])
+        $investasi = Investasi::where('id', $id)
+                    ->with(['user', 'kandang'])
                     ->first();
+        
+        $now = Carbon::now();
+        $date_invest = Carbon::parse($investasi->created_at);
+        $selisih = $now->diffInMonths($date_invest);
+        
+        if($investasi->is_done == 0 && $selisih >= $investasi->kandang->durasi){
+            $investasi->is_done = 1;
+            $investasi->save();
+        }
 
         if($investasi){
             return response()->json([
                 'success' => true,
                 'message' => "Investasi berhasil diterima!",
                 'investasi'    => $investasi,  
+                'bulan_invest' => Carbon::parse($investasi->created_at)->month,
+                'bulan_sekarang' => Carbon::now()->month,
+                'selisih' => $selisih
             ], 201);
         }
 
