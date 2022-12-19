@@ -50,9 +50,6 @@ class InvestasiController extends Controller
                 'success' => true,
                 'message' => "Investasi berhasil diterima!",
                 'investasi'    => $investasi,  
-                'bulan_invest' => Carbon::parse($investasi->created_at)->month,
-                'bulan_sekarang' => Carbon::now()->month,
-                'selisih' => $selisih
             ], 201);
         }
 
