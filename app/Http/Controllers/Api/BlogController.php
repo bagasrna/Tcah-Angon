@@ -11,6 +11,7 @@ class BlogController extends Controller
 {
     public function index(){
         $blogs = Blog::all();
+        
         if($blogs){
             return response()->json([
                 'success' => true,
